@@ -45,3 +45,4 @@ class STMLink(Link):
             return message
         except Exception as e:
             self.logger.error(f"Error occured while recieving message from STM32: {e}")
+            raise e
