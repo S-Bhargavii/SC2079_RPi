@@ -6,8 +6,6 @@ from picamera.array import PiRGBArray
 from utility.settings import API_PORT, API_IP
 from utility.logger import configure_logger
 
-PLACEHOLDER_IMAGE = "/home/pi/Desktop/mdp/code/utility/placeholder.jpg"
-
 # ImageZMQ is used because it is optimised for fast and efficient messaging of images. It uses tcp protocol for communication.
 
 class ImageRecLink:
