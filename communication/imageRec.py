@@ -2,9 +2,11 @@
 import imagezmq
 import logging
 from picamera import PiCamera
-from picamera.array import PiRGBArray 
+from picamera.array import PiRGBArray
 from utility.settings import API_PORT, API_IP
 from utility.logger import configure_logger
+
+PLACEHOLDER_IMAGE = "/home/pi/Desktop/mdp/code/utility/placeholder.jpg"
 
 # ImageZMQ is used because it is optimised for fast and efficient messaging of images. It uses tcp protocol for communication.
 
@@ -26,15 +28,7 @@ class ImageRecLink:
         """
         try:
             # open camera
-            camera = PiCamera(resolution=(640, 640))
-            self.logger.debug("Initialised camera")
-        
-            # capture image
-            rawCapture = PiRGBArray(camera)
-            camera.capture(rawCapture, format = "bgr")
-            image = rawCapture.array
-            rawCapture.truncate(0)
-            self.logger.debug("Captured image")
+            image = self._take_image()
 
             # send image to server
             reply = self.image_sender.send_image("RaspberryPi", image)
@@ -45,17 +39,37 @@ class ImageRecLink:
             # raise e # raise the error
         finally:
             self.logger.info(f"Image recognised by server. Image id : {image_id}")
-            if camera:
-                camera.close() # close the camera
-                self.logger.debug("Closed camera")
         
         return image_id
 
+    def _take_image(self):
+        try:
+            camera = PiCamera(resolution=(640, 640))
+            self.logger.debug("Initialised camera")
+        
+            # capture image
+            rawCapture = PiRGBArray(camera)
+            camera.capture(rawCapture, format = "bgr")
+            image = rawCapture.array
+            rawCapture.truncate(0)
+            self.logger.debug("Captured image")
+    
+        except Exception as e:
+            self.logger.error(f"Failed to take image : {e}")
+            # raise e # raise the error
+        finally:
+            if camera:
+                camera.close() # close the camera
+                self.logger.debug("Closed camera")
+        return image
+    
     def cleanup(self):
         """
             Clean up after image recongition task is done
         """
         try:
+            img = self._take_image() # last image to close the server - TODO : find a better way to send the message
+            self.image_sender.send_image("close", img) 
             self.image_sender.close()
             self.logger.info("Image recognition link closed")
         except Exception as e:
