@@ -15,7 +15,7 @@ while True:
         break
 
     # (Perform image recognition here, replace with actual model)
-    label = "1"  # This would be replaced by your image recognition logic
+    label = "1"  # This would be replaced the YOLO model output
 
     # Send back label
     image_hub.send_reply(label.encode())

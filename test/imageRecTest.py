@@ -1,5 +1,4 @@
 # test the image recognition module
-# test the image recognition module
 
 import sys
 sys.path.append("/home/pi/Desktop/mdp/code")
