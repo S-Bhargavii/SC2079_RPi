@@ -3,8 +3,11 @@ SERIAL_PORT = "/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Cont
 BAUD_RATE = 115200
 
 # API DETAILS
-API_IP = '192.168.3.20'  # IP address of laptop
-API_PORT = 5555 # image zmq server port 
+IMAGE_API_IP = '192.168.3.20'  # IP address of laptop
+IMAGE_API_PORT = 5555 # image zmq server port 
+
+PATH_API_IP = '192.168.3.20'
+PATH_API_PORT = 5000
 
 # ROBOT SETTINGS
 OUTDOOR_BIG_TURN = False

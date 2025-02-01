@@ -3,7 +3,7 @@ import imagezmq
 import logging
 from picamera import PiCamera
 from picamera.array import PiRGBArray
-from utility.settings import API_PORT, API_IP
+from utility.settings import IMAGE_API_PORT, IMAGE_API_IP
 from utility.logger import configure_logger
 
 # ImageZMQ is used because it is optimised for fast and efficient messaging of images. It uses tcp protocol for communication.
@@ -15,7 +15,7 @@ class ImageRecLink:
     def __init__(self):
         self.logger = logging.getLogger("ImageRecLink")
         configure_logger(self.logger)
-        address = f"tcp://{API_IP}:{API_PORT}"
+        address = f"tcp://{IMAGE_API_IP}:{IMAGE_API_PORT}"
         self.image_sender = imagezmq.ImageSender(connect_to=address)
         self.logger.info(f"Connected to Image Recognition Server at {address}")
     
