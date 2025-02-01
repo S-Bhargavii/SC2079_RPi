@@ -11,6 +11,7 @@ while True:
 
     # Check if message is "close" to stop the server
     if message == "close":
+        # perform stitching with the images received
         print("Closing ImageZMQ server...")
         break
 
