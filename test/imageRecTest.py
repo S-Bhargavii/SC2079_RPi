@@ -1,0 +1,1 @@
+# test the image recognition module
