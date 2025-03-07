@@ -1,0 +1,37 @@
+This file is basically to decide on the codes that are used for communication between android and rpi.
+
+ANDROID --> RPI 
+Possible messages that the android sends to the rpi
+ONLY THIS IS REQUIRED FOR THE IMAGE RECOGNITION TASK - 
+1. {"type":"obstacles", "value":
+        [
+            {"x":1, "y":2, "id":0, "direction":'N/S/W/E'},
+            {"x":1, "y":2, "id":0, "direction":N/S/W/E},
+        ]
+   }
+
+FOR THE SECOND TASK - 
+1. {"type":"control", "value":"start"} - to start the robot
+
+x - x coordinate 
+y - y coordinate 
+One x unit is 10 cm.
+One y unit is 10 cm.
+id - obstacle id 
+d - direction 
+    0 - North 
+    2 - East
+    4 - South 
+    6 - West
+
+RPI --> Android 
+1. {"type":"info", "value":"msg"} - Normal status messages
+2. {"type":"error", "value":"msg"} - Error messages
+5. {"type":"status", "value":"msg"} - Status of robot
+3. {"type": "location",
+    "value": {
+        "robot": {"x": 12, "y": 7, "direction": "W"},
+        "command": "LF090"
+    }
+} - Location and orientation update
+4. {"type":"image-rec","value":"TARGET,B2,U,W"} - identified obstacle id 2 image to be 22 facing West

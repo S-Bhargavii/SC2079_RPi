@@ -1,0 +1,43 @@
+These are the image ids for each image that is recognised
+image - id
+1       11 
+2       12
+3       13
+4       14
+5       15
+6       16
+7       17
+8       18
+9       19
+A       20
+B       21
+C       22
+D       23  
+E       24
+F       25
+G       26
+H       27
+S       28
+T       29
+U       30
+V       31
+W       32
+X       33
+Y       34
+Z       35
+up      36
+down    37
+right   38
+left    39
+stop    40
+bullseye 10
+
+the rpi would also send some messages  - 
+1. "test" - this is to test the connection between server. Return 1 when this msg is recieved
+2. "close" - to close the server. if closed successfully return 2
+
+msg   code 
+test   1
+close  2
+error  0
+successful stitch 3
