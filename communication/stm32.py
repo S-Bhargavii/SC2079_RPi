@@ -5,7 +5,7 @@ from utility.settings import SERIAL_PORT, BAUD_RATE
 
 class STMLink(Link):
     def __init__(self):
-        super.__init__("STM")
+        super().__init__("STM")
         self.serial_link = None
     
     def connect(self):
@@ -17,6 +17,7 @@ class STMLink(Link):
             self.logger.info("Connected to STM32")
         except Exception as e:
             self.logger.error("Error occured when trying to connect to STM: {e}")
+            raise e # raise error to let main thread know
 
     def disconnect(self):
         """
@@ -28,6 +29,7 @@ class STMLink(Link):
             self.logger.info("Disconnected from STM32")
         except Exception as e:
             self.logger.error("Error occured when trying to close connection: {e}")
+            raise e
     
     def send(self, message:str) -> None:
         try:

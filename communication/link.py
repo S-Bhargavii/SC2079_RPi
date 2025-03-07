@@ -18,6 +18,20 @@ class Link(ABC):
         configure_logger(self.logger)
     
     @abstractmethod
+    def connect(self) -> None:
+        """
+            Method for connection
+        """
+        pass
+
+    @abstractmethod
+    def disconnect(self) -> None:
+        """
+        Method for disconnection
+        """
+        pass
+    
+    @abstractmethod
     def send(self, message:str) -> None:
         """
             Method for sending messages from RPi
