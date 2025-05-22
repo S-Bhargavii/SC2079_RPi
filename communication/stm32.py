@@ -32,6 +32,11 @@ class STMLink(Link):
             raise e
     
     def send(self, message:str) -> None:
+        """
+            Send messages to STM32.
+            Args:
+                msg: The message that you want to send.
+        """
         try:
             message_bytes = f"{message}".encode("utf-8")
             self.serial_link.write(message_bytes)
@@ -41,6 +46,11 @@ class STMLink(Link):
             raise e  
     
     def recv(self):
+        """
+            Recieve messages from STM32.
+            Returns:
+                message: The message sent by STM32.
+        """
         try:
             message = self.serial_link.readline().strip().decode("utf-8")
             self.logger.debug(f"Recieved from STM32: {message}")

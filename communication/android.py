@@ -44,6 +44,14 @@ class AndroidLink(Link):
         """
         self.logger.info("Bluetooth connection started")
         try:
+            # uncomment these 4 lines of code if you have issues connecting to bluetooth 
+            # we had issues when connection when there were multiple bluetooth devices 
+            # probably coz multiple devices had the same mac addr
+            # os.system("sudo bdaddr -i hci0 01:23:45:67:89:ab")
+            # os.system("sudo hciconfig hci0 reset")
+            # os.system("sudo systemctl restart bluetooth.service")
+            # time.sleep(3) # wait for the service to restart
+
             os.system("sudo hciconfig hci0 piscan") # allows the rpi bluetooth to be discoverable
 
             #Initialise the server socket - this is the listening socket and it will listen for connections 

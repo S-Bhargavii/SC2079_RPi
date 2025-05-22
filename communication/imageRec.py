@@ -16,6 +16,7 @@ class ImageRecLink:
         """
             Just configuring the logger - to keep it same as the other Links
         """
+        self.img_count = 0
         self.logger = logging.getLogger("ImageRecLink")
         configure_logger(self.logger)
     
@@ -56,8 +57,6 @@ class ImageRecLink:
     def set_timeout(self):
         """
             Set socket timeout
-            TO DO : i think its a bit wasteful to have a new method 
-            for this -- will see where this needs to be placed
         """
         self.image_sender.zmq_socket.setsockopt(zmq.RCVTIMEO, IMAGE_API_RESPONSE_TIMEOUT)
 
@@ -93,12 +92,17 @@ class ImageRecLink:
             Returns:
                 img: image taken by the rpis
         """
-        try:        
+        try:  
+            # uncomment the commented code if you want to save 
+            # the images to rpi to examine later       
+
             # capture image
             rawCapture = PiRGBArray(self.camera)
             self.camera.capture(rawCapture, format = "bgr")
             image = rawCapture.array
             rawCapture.truncate(0)
+            # self.img_count += 1
+            # cv2.imwrite(f"/home/pi/Desktop/RPi/images/captured_image_{self.img_count}.jpg", image)
             self.logger.debug("Captured image")
     
         except Exception as e:
@@ -141,12 +145,3 @@ class ImageRecLink:
         except Exception as e:
             self.logger.error(f"Failed to close image recognition link : {e}")
             raise e # raise the error
-
-# TO CHECK - 01/02/2025
-# 1. Should the camera be initialised in the constructor or should 
-# it be initialised in the imageRec method?
-# eugene - in the constructor imo, initialise once instead of every invocation
-    # ---- RESOLVED
-
-# TO DO - 06/02/2025
-# Error handling should be done more properly
