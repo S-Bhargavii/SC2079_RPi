@@ -31,10 +31,10 @@ To handle multiple tasks simultaneously and improve system responsiveness, this 
 
 - `checklist/` – Pre-run checks to validate component connectivity.
 - `communication/` – Communication handling between RPi, tablet, STM32, and servers.
-- `servers/` – Server-side interfaces for image recognition or task coordination.
-- `task_1/` – Logic for Task 1: navigation and basic obstacle avoidance.
-- `task_2/` – Logic for Task 2: symbol/image recognition and advanced control.
-- `test/` – Unit and integration tests for various modules.
+- `servers/` – Server side interfaces for communicating with the image recognition server and path planning server.
+- `task_1/` – Logic for Task 1: Image recognition task.
+- `task_2/` – Logic for Task 2: Fastest car race.
+- `test/` – Test codes for testing communication with different components. Also contains mock tests for task1 ( to check threading ).
 - `utility/` – Helper scripts and utility functions.
 
 ---
